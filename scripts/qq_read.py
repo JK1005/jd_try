@@ -473,6 +473,8 @@ def qq_read():
                     content += f'【用户昵称】{user_info["user"]["nickName"]}'
                 # 获取任务列表，查询金币余额
                 daily_tasks = get_daily_tasks(headers=headers)
+
+                '''如果需要一个单独开箱子的脚本，删除↑↓箭头内脚本，一共两个代码段，这是第一个代码段   ↓ '''
                 if daily_tasks:
                     content += f'\n【金币余额】剩余{daily_tasks["user"]["amount"]}金币，可提现{daily_tasks["user"]["amount"] // 10000}元'
                 # 查询今日获得金币数量
@@ -569,6 +571,8 @@ def qq_read():
                             if reward:
                                 content += f"\n【周时长奖励】领取{week_read_reward['readTime']}时长奖励成功"
 
+                '''如果需要一个单独开箱子的脚本，删除↑↓箭头内脚本，一共两个代码段，这是第一个代码段   ↑ '''
+
                 # 开宝箱领金币
                 if daily_tasks['treasureBox']['doneFlag'] == 0:
                     treasure_box_reward = open_treasure_box(headers=headers)
@@ -581,6 +585,8 @@ def qq_read():
                     treasure_box_ads_reward = watch_treasure_box_ads(headers=headers)
                     if treasure_box_ads_reward:
                         content += f"\n【宝箱奖励翻倍】获得{treasure_box_ads_reward['amount']}金币"
+
+                '''如果需要一个单独开箱子的脚本，删除↑↓箭头内脚本，一共两个代码段，这是第二个代码段   ↓ '''
 
                 # 读书刷时长
                 if max_read_time > today_read_time["todayReadSeconds"] // 60:
@@ -678,7 +684,10 @@ def qq_read():
                 else:
                     print('未在规定的时间范围内\n')
 
+                '''如果需要一个单独开箱子的脚本，删除↑↓箭头内脚本，一共两个代码段，这是第二个代码段   ↑ '''
+
             except:
+                # 如果headers过期，先获取 QQ 号
                 headers = account['HEADERS']
                 utc_datetime, beijing_datetime = get_standard_time()
                 ywguid = re.match(r'ywguid=(.*?);', str(headers['Cookie']), re.I)
@@ -686,6 +695,7 @@ def qq_read():
                     pattern = re.compile(r'\d+')
                     qq_id = pattern.findall(str(ywguid.group()))
                     print(f'☆【企鹅读书】{beijing_datetime.strftime("%Y-%m-%d %H:%M:%S")} ☆\nQQ账号 {qq_id[0]} headers过期!')
+                    # 发送推送
                     if qq_read_config['notify'] and beijing_datetime.hour / 3 == 0 and beijing_datetime.minute < 10:
                         notify.send(title=f'☆【企鹅读书】{beijing_datetime.strftime("%Y-%m-%d %H:%M:%S")} ☆',
                                     content=f'QQ账号 {qq_id[0]} headers过期!', notify_mode=notify_mode)

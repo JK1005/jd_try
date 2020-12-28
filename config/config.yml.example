@@ -1,5 +1,5 @@
 name: TNanko's Scripts Config File
-version: v1.2.5
+version: v1.2.6
 skip_check_config_version: false # 默认不跳过配置文件的版本检测
 
 # 消息推送
@@ -28,7 +28,7 @@ jobs:
   qq_read:
     # 使用前请阅读 https://github.com/TNanko/Scripts/blob/master/docs/qq_read.md
     enable: false # true 启用脚本； false 不启用脚本（默认不启用脚本）
-    version: v1.3.4
+    version: v1.3.5
     skip_check_script_version: false # 默认不跳过版本检测
     notify: false # true 启用消息推送； false 不启用消息推送（默认不发消息推送）
     notify_mode:  # 如果全都配置了，可以根据自身需求进行消息推送方式的选择，不需要的可以注释掉或者删除。由于 bark 消息长度的限制，不推荐 bark

@@ -690,11 +690,9 @@ def qq_read():
                 # 如果headers过期，先获取 QQ 号
                 headers = account['HEADERS']
                 utc_datetime, beijing_datetime = get_standard_time()
-                ywguid = re.match(r'ywguid=(.*?);', str(headers['Cookie']), re.I)
-                if ywguid:
-                    pattern = re.compile(r'\d+')
-                    qq_id = pattern.findall(str(ywguid.group()))
-                    print(f'☆【企鹅读书】{beijing_datetime.strftime("%Y-%m-%d %H:%M:%S")} ☆\nQQ账号 {qq_id[0]} headers过期!')
+                qq_id = re.findall(r'ywguid=(.*?);', str(headers['Cookie']))[0]
+                if qq_id:
+                    print(f'☆【企鹅读书】{beijing_datetime.strftime("%Y-%m-%d %H:%M:%S")} ☆\nQQ账号 {qq_id} headers过期!')
                     # 发送推送
                     if qq_read_config['notify'] and beijing_datetime.hour / 3 == 0 and beijing_datetime.minute < 10:
                         notify.send(title=f'☆【企鹅读书】{beijing_datetime.strftime("%Y-%m-%d %H:%M:%S")} ☆',

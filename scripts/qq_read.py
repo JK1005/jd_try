@@ -680,12 +680,15 @@ def qq_read():
 
             except:
                 headers = account['HEADERS']
+                utc_datetime, beijing_datetime = get_standard_time()
                 ywguid = re.match(r'ywguid=(.*?);', str(headers['Cookie']), re.I)
                 if ywguid:
                     pattern = re.compile(r'\d+')
                     qq_id = pattern.findall(str(ywguid.group()))
-                    utc_datetime, beijing_datetime = get_standard_time()
                     print(f'☆【企鹅读书】{beijing_datetime.strftime("%Y-%m-%d %H:%M:%S")} ☆\nQQ账号 {qq_id[0]} headers过期!')
+                    if qq_read_config['notify'] and beijing_datetime.hour / 3 == 0 and beijing_datetime.minute < 10:
+                        notify.send(title=f'☆【企鹅读书】{beijing_datetime.strftime("%Y-%m-%d %H:%M:%S")} ☆',
+                                    content=f'QQ账号 {qq_id[0]} headers过期!', notify_mode=notify_mode)
                 else:
                     print('获取QQ账号失败，请检查headers')
     else:

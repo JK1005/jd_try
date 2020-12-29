@@ -1,5 +1,5 @@
 name: TNanko's Scripts Config File
-version: v1.2.6
+version: v1.3.6
 skip_check_config_version: false # 默认不跳过配置文件的版本检测
 
 # 消息推送
@@ -36,6 +36,9 @@ jobs:
       - telegram_bot
       - dingding_bot
       - server_chan
+    scripts_filename: 'qq_read.py'
+    schedule:
+      cron: '*/10 * * * *'
     parameters:
       UPLOAD_TIME: 5 # 每次上传阅读时长（单位分钟）
       MAX_READ_TIME: 600 # 每日最大阅读时长（单位分钟）
@@ -56,6 +59,9 @@ jobs:
       - telegram_bot
       - dingding_bot
       - server_chan
+    scripts_filename: 'bilibili.py'
+    schedule:
+      cron: '10 1 * * *'
     parameters:
       ACCOUNTS:
         - COOKIE:

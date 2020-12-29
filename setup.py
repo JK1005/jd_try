@@ -9,6 +9,7 @@
 
 import os
 from datetime import datetime, timezone, timedelta
+from bin import schedule
 
 BASE_DIR = os.path.split(os.path.abspath(os.path.realpath(__file__)))[0]
 
@@ -22,5 +23,14 @@ def get_standard_time():
     beijing_datetime = utc_datetime.astimezone(timezone(timedelta(hours=8)))  # 北京时间
     return utc_datetime, beijing_datetime
 
-# if __name__ == '__main__':
+def setup_crontab():
+    print('【删除项目旧定时任务...】')
+    schedule.delete_cron()
+    print('【创建项目定时任务...】')
+    schedule.create_cron(skip_check_version=True)
+
+if __name__ == '__main__':
+    print('【开始安装 TNanko Scripts ...】')
+    setup_crontab()
+    print('【安装成功！】')
 #     get_standard_time()

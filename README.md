@@ -10,23 +10,35 @@
 
 ### 一、linux/windows virtual private server
 
-* 如果你没有安装 `git` ，那么运行 `apt-get install git -y`(Ubuntu/Debian) 或者 `yum install git -y`(Centos) 根据你的系统选择对应的命令。
+* 安装环境
+    ```
+    # debian/ubuntu/armbian/OpenMediaVault等其他debian系
+    apt-get install git python3 -y
+    
+    # CentOS/RedHat/Fedora等红帽系
+    yum install git python3 -y
+    ```
+* 下载代码
+    ```
+    git clone https://github.com/TNanko/Scripts.git
+    ```
+* 部署脚本
+    ```yaml
+    # 安装脚本需要的包
+    pip3 install -r requirements.txt
 
-* `git clone https://github.com/TNanko/Scripts.git`。
+    # 进入脚本目录
+    cd Scripts
 
-* 确保你的 `vps` 里面安装 `python3.6` 及其以上版本，没有安装则运行 `apt-get install python3 -y`(Ubuntu/Debian) 或者 `yum install python3 -y`(Centos) 命令来安装 `python3`。
+    # 复制仓库下config/config.yml.example到config目录中，并重命名为config.yml
+    cp ./config/config.yml.example ./config/config.yml
 
-* 安装脚本所需要的包 `pip3 install -r requirements.txt`。
+    # 编辑配置文件（推送和脚本配置，建议将配置文件下载到本地使用 Visual Studio Code/Sublime Text/Vim 等文本编辑器编辑）
+    vi ./config/config.yml
 
-* 进入到 `config` 文件夹下（`cd config`） ，复制文件夹 `config` 下的 `config.yml.example` 文件并将文件命名为 `config.yml` （`cp config.yml.example config.yml`）。使用 `vi` 或者文本编辑器编辑文件 `config.yml` 填写配置。
-
-* 在配置文件中填写对应的推送方式的 `key` 或者 `code`。
-
-* 找到想要运行的脚本，设置对应的配置信息。
-
-* 返回到 `Scripts` 目录下，运行脚本 `python3 ./scripts/xxx.py`。
-
-* 最后就是自己添加定时任务，不会的百度 `Google`。
+    # 运行 setup.py 添加 cron 定时任务
+    python3 setup.py
+    ```
 
 ### 二、github action
 
@@ -117,7 +129,7 @@
 
 **版本号：v<主版本号>.<子版本号>.<阶段版本号>**
 * 主版本号发生改变，表示代码框架改动较大，如果更新代码后，则必须更新配置文件；
-* 子版本号发生改变，表示新增脚本，如果需要使用新脚本，则需要更新配置文件并重新配置；
+* 子版本号发生改变，表示增加新功能或者新脚本，如果需要使用新脚本，则需要更新配置文件并重新配置；
 * 阶段版本号发生改变，表示修复某个脚本的 `bug`，则根据对应脚本的版本号来决定是否需要更新配置文件。
 
 ### 脚本的版本

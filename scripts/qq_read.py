@@ -33,7 +33,7 @@ def pretty_dict(dict):
     :param dict:
     :return:
     """
-    return print(json.dumps(dict, indent=4, ensure_ascii=False))
+    print(json.dumps(dict, indent=4, ensure_ascii=False))
 
 
 def get_user_info(headers):

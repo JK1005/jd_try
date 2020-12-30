@@ -121,7 +121,7 @@
 
 ### `bilibili` 签到
 
-* 脚本地址：https://raw.githubusercontent.com/TNanko/Scripts/master/scripts/bilibili.py
+* 使用脚本前务必看一遍教程，[脚本](https://raw.githubusercontent.com/TNanko/Scripts/master/scripts/bilibili.py)，[使用教程](https://github.com/TNanko/Scripts/blob/master/docs/bilibili.md)
 
 ## 关于版本
 

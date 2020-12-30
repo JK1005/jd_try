@@ -24,11 +24,11 @@
     ```
 * 部署脚本
     ```yaml
-    # 安装脚本需要的包
-    pip3 install -r requirements.txt
-
     # 进入脚本目录
     cd Scripts
+    
+    # 安装脚本需要的包
+    pip3 install -r requirements.txt
 
     # 复制仓库下config/config.yml.example到config目录中，并重命名为config.yml
     cp ./config/config.yml.example ./config/config.yml

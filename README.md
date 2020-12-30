@@ -69,41 +69,13 @@
     docker run -dit \
     -v /appdata/tnanko/config.yml:/Scripts/config/config.yml `#配置文件保存目录，冒号左边是示例路径，以你实际路径为准` \
     -v /appdata/tnanko/log:/Scripts/log `#日志保存目录，冒号左边是示例路径，以你实际路径为准` \
-    -e ENABLE_QQREAD_CRONTAB=true `#如需启用qq_read的定时任务，必须保留此行` \
     --name tnanko_scripts \
     --hostname tnanko_scripts \
     --restart always \
     evinedeng/tnanko_scripts
     ```
 
-    总共有以下5个环境变量供选择，你不设置就使用默认值，如不想使用默认值，请参考上述命令中`-e ENABLE_QQREAD_CRONTAB=true`这一行的形式添加到部署容器的命令中（注意等号两边都没有空格）：
-
-| 序号 | 变量名               | 可以设置的值 | 默认值    | 说明                                                                                    |
-| ---- | ----------------------- | ---------------- | ------------ | ----------------------------------------------------------------------------------------- |
-| 1    | ENABLE_QQREAD_CRONTAB   | true/false       | false        | 是否启用qq_read的定时任务，注意这里和config.yml中qq_read均设置为true，定时任务才会运行。 |
-| 2    | QQREAD_CRONTAB          | 5位的crontab格式 | */10 * * * * | 没啥好说的，你想啥时候运行qq_read，ENABLE_QQREAD_CRONTAB设置为true时，本项设置才会生效。**按上述部署容器的命令时需要加双引号。** |
-| 3    | ENABLE_BILIBILI_CRONTAB | true/false       | false        | 是否启用bilibili的定时任务，注意这里和config.yml中bilibili均设置为true，定时任务才会运行。 |
-| 4    | BILIBILI_CRONTAB        | 5位的crontab格式 | 15 8 * * * | 没啥好说的，你想啥时候运行bilibili，ENABLE_BILIBILI_CRONTAB设置为true时，本项设置才会生效。**按上述部署容器的命令时需要加双引号。** |
-| 5    | RM_LOG_DAYS_BEFORE      | 正整数        | 7            | 每周六凌晨4:25分自动删除指定时间以前的日志，默认为7天，如需要修改为其他天数，请自定义。 |
-
-4. 完成，等着收钱吧。如果你想修改配置，直接改完`config.yml`就行了，无需重启容器什么的。
-
-5. **如果提示`config.yml.example`文件有更新时，如何操作：**
-
-    ```shell
-    cd /appdata/tnanko  # 注意这只是示例目录
-    docker cp tnanko_scripts:/Scripts/config/config.yml.example config.new.yml
-    # 然后编辑/appdata/tnanko/config.new.yml这个文件，可以参考你原来的config.yml这个文件复制过来，再补充新的设置即可，修改好后再运行下面命令
-    mv config.new.yml config.yml
-    ```
-6. 如果你想自动更新`tnanko_scripts`容器，请安装watchtower：
-
-    ```shell
-    docker run -d \
-    --name watchtower \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    containrrr/watchtower
-    ```
+4. 完成，等着收钱吧。如果你想修改配置，只要不是改cron，直接改完`config.yml`就行了，无需重启容器什么的；但如果你想改cron，改完以后必须重启下容器，命令：`docker restart tnanko_scripts`
 
 ## 消息推送
 

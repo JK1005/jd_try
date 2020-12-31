@@ -701,7 +701,7 @@ def qq_read():
                 # 如果headers过期，先获取 QQ 号
                 headers = account['HEADERS']
                 utc_datetime, beijing_datetime = get_standard_time()
-                qq_id = re.findall(r'ywguid=(.*?);', str(headers['Cookie']))[0]
+                qq_id = re.findall(r'ywguid=(.*?);', str(headers))[0]
                 if qq_id:
                     print(f'☆【企鹅读书】{beijing_datetime.strftime("%Y-%m-%d %H:%M:%S")} ☆\nQQ账号 {qq_id} headers过期!')
                     # 发送推送

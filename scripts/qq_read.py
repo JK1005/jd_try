@@ -22,8 +22,8 @@ import time
 import random
 import requests
 import traceback
-from setup import get_standard_time
-from utils import notify
+from setup import get_standard_time, BASE_DIR
+from utils import notify, log
 from utils.configuration import read
 
 
@@ -430,7 +430,7 @@ def qq_read():
     # 脚本版本检测
     try:
         if qq_read_config['skip_check_script_version']:
-            print('参数 skip_check_script_version = true ，跳过脚本版本检测...')
+            print('脚本配置参数 skip_check_script_version = true ，跳过脚本版本检测...')
         elif config_latest:
             if config_latest['jobs']['qq_read']['version'] > qq_read_config['version']:
                 print(f"检测到最新的脚本版本号为{config_latest['jobs']['qq_read']['version']}，当前脚本版本号：{qq_read_config['version']}")
@@ -448,6 +448,10 @@ def qq_read():
     max_read_time = qq_read_config['parameters']['MAX_READ_TIME']
     # 消息推送方式
     notify_mode = qq_read_config['notify_mode']
+    # 脚本名字
+    scripts_filename = qq_read_config['scripts_filename']
+    # 日志相关参数
+    log_parameters = qq_read_config['log']
 
     # 确定脚本是否开启执行模式
     if qq_read_config['enable']:
@@ -680,8 +684,26 @@ def qq_read():
 
                 content += f'\n🕛耗时：%.2f秒' % (time.time() - start_time)
                 content += f'\n如果帮助到您可以点下🌟STAR鼓励我一下，谢谢~'
-                print(title)
-                print(content)
+
+                if log_parameters['enable']:
+                    try:
+                        # folder_path = os.path.join(BASE_DIR, 'log')  # 可能 windows 系统不适用（未测试）
+                        folder_path = BASE_DIR + f'/log/{scripts_filename[:-3]}'
+                        if not os.path.isdir(folder_path):
+                            print('对应的日志文件夹不存在，创建日志文件夹...')
+                            os.makedirs(folder_path)
+                        beijing_datetime.strftime("%Y-%m-%d %H:%M:%S")
+                        log_path = folder_path + '/%s.log' % beijing_datetime.strftime('%Y-%m-%d')
+                        log.write_scripts_log(path=log_path, msg='%s\n\n%s' % (title, content))
+                        if beijing_datetime.hour >= 23:
+                            log.delete_scripts_log(path=folder_path, valid_period=log_parameters['valid_period'])
+                    except:
+                        print('写入日志失败！')
+                        print(title)
+                        print(content)
+                else:
+                    print(title)
+                    print(content)
 
                 '''如果需要一个单独开箱子的脚本，删除↑↓箭头内脚本，一共4个代码段，这是第4个代码段   ↓ '''
 
@@ -698,6 +720,7 @@ def qq_read():
                 '''如果需要一个单独开箱子的脚本，删除↑↓箭头内脚本，一共4个代码段，这是第4个代码段   ↑ '''
 
             except:
+                print(traceback.format_exc())
                 # 如果headers过期，先获取 QQ 号
                 headers = account['HEADERS']
                 utc_datetime, beijing_datetime = get_standard_time()

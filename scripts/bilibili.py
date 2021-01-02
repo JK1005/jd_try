@@ -15,8 +15,8 @@ import json
 import time
 import requests
 import traceback
-from setup import get_standard_time
-from utils import notify
+from setup import get_standard_time, BASE_DIR
+from utils import notify, log
 from utils.configuration import read
 
 
@@ -70,7 +70,7 @@ def bilibili():
     # 脚本版本检测
     try:
         if bilibili_config['skip_check_script_version']:
-            print('参数 skip_check_script_version = true ，跳过脚本版本检测...')
+            print('脚本配置参数 skip_check_script_version = true ，跳过脚本版本检测...')
         elif config_latest:
             if config_latest['jobs']['bilibili']['version'] > bilibili_config['version']:
                 print(
@@ -81,6 +81,11 @@ def bilibili():
             print('未获取到最新脚本的版本号')
     except:
         print('程序运行异常，跳过脚本版本检测...')
+    # 脚本名字
+    scripts_filename = bilibili_config['scripts_filename']
+    # 日志相关参数
+    log_parameters = bilibili_config['log']
+
     if bilibili_config['enable']:
         # 获取config.yml账号信息
         accounts = bilibili_config['parameters']['ACCOUNTS']
@@ -109,8 +114,28 @@ def bilibili():
 
             content += f'\n🕛耗时：%.2f秒' % (time.time() - start_time)
             content += f'\n如果帮助到您可以点下🌟STAR鼓励我一下，谢谢~'
-            print(title)
-            print(content)
+
+            if log_parameters['enable']:
+                try:
+                    # folder_path = os.path.join(BASE_DIR, 'log')  # 可能 windows 系统不适用（未测试）
+                    folder_path = BASE_DIR + f'/log/{scripts_filename[:-3]}'
+                    if not os.path.isdir(folder_path):
+                        print('对应的日志文件夹不存在，创建日志文件夹...')
+                        os.makedirs(folder_path)
+                    beijing_datetime.strftime("%Y-%m-%d %H:%M:%S")
+                    log_path = folder_path + '/%s.log' % beijing_datetime.strftime('%Y-%m-%d')
+                    # 写入日志
+                    log.write_scripts_log(path=log_path, msg='%s\n\n%s' % (title, content))
+                    # 删除过期日志
+                    log.delete_scripts_log(path=folder_path, valid_period=log_parameters['valid_period'])
+                except:
+                    print('写入日志失败！')
+                    print(title)
+                    print(content)
+            else:
+                print(title)
+                print(content)
+
             if bilibili_config['notify']:
                 # 消息推送方式
                 notify_mode = bilibili_config['notify_mode']

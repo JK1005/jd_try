@@ -17,7 +17,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && rm -rf /var/cache/apk/* \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
-    && pip config set global.index-url https://mirrors.aliyun.com/pypi/simple \
+    && pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
     && python -m pip install --upgrade pip \
     && git clone -b master https://github.com/TNanko/Scripts ${SCRIPTS_DIR} \
     && cd ${SCRIPTS_DIR} \

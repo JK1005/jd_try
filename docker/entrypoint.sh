@@ -2,6 +2,7 @@
 set -e
 
 crontab -r
+crond
 
 if [ -f ${SCRIPTS_DIR}/config/config.yml ]
 then
@@ -13,8 +14,6 @@ else
   echo "请先配置好config.yml..."
   exit 1
 fi
-
-crond
 
 if [ "${1#-}" != "${1}" ] || [ -z "$(command -v "${1}")" ]; then
   set -- python3 "$@"

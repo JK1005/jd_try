@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-crontab -r
+echo "" | crontab -
 crond
 
 if [ -f ${SCRIPTS_DIR}/config/config.yml ]

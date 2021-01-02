@@ -14,6 +14,8 @@ else
   exit 1
 fi
 
+crond
+
 if [ "${1#-}" != "${1}" ] || [ -z "$(command -v "${1}")" ]; then
   set -- python3 "$@"
 fi

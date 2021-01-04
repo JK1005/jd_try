@@ -1,5 +1,5 @@
 ## 紧急通知
-由于本人版本退回操作，现在更新脚本需要保存配置文件，然后删掉 `Scripts` 文件夹**重新克隆本仓库**，仅此次更新会这样（2021/1/5）
+由于本人版本退回操作，下次更新脚本可能会遇到一个错误 `unable to auto-detect email address` [解决方法](https://blog.csdn.net/liufangbaishi2014/article/details/50037507)或者保存配置文件，然后删掉 `Scripts` 文件夹**重新克隆本仓库**，仅此次更新会这样（2021/1/5）
 
 ## 描述
 

@@ -1,6 +1,6 @@
 ## 描述
 
-一个使用 `Python` 语言写的薅羊毛脚本仓库，支持 `github action` 和 `linux/windows virtual private server` 
+一个使用 `Python` 语言写的薅羊毛脚本仓库，支持 `github action` 和 `linux/windows virtual private server`。 
 
 ## 部署方式
 
@@ -42,15 +42,10 @@
 
 ### 二、github action
 
-* 添加一个 `secrets` - `CONFIG` ， `Value` 内容请复制目录下 `./config/config.yml.example` 所有内容。
-
-* 填写对应的推送方式的 `key` 或者 `code`。
-
-* 找到想要运行的脚本，设置对应的配置信息。
-
-* 手动 `star` 一下仓库，看下 `Action` 是否正常运行。
-
-* 定时同步仓库：添加一个 `secrets` - `PAT` ，[教程](https://www.jianshu.com/p/bb82b3ad1d11)。
+* 复制该文件 `./config/config.yml.example` 所有内容，填写相应的配置信息（推送的 `Key` 或者 `Token` 以及脚本所需要的 `Cookie` 等等）；
+* 在 Settings -> Secrets -> New repository secret 这边添加一个新的 `secrets` - `CONFIG` ， `Value` 就是第一步你填写的配置信息；
+* 手动 `star` 一下仓库，看下 `Action` 是否正常运行；
+* 定时同步仓库：添加一个 `secrets` - `PAT` ，[教程](https://www.jianshu.com/p/bb82b3ad1d11)（不建议打开，因为高版本脚本不兼容低版本的配置文件）。
 
 ### 三、Docker
 
@@ -84,18 +79,11 @@
 打开推送方式：将 `config.yml` 里面 `notify` 选项中，参数 `enable` 设置为 `true`
 
 ## 支持的脚本任务
-
-### 企鹅读书
-
-* 使用脚本前务必看一遍教程，[脚本地址](https://raw.githubusercontent.com/TNanko/Scripts/master/scripts/qq_read.py)，[使用教程](https://github.com/TNanko/Scripts/blob/master/docs/qq_read.md)
-
-* 此脚本使用 `Python` 语言根据[原js脚本](https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/qqreads.js)重写，并在原有的基础上扩展了一些功能。
-
-### `bilibili` 签到
-
-* 使用脚本前务必看一遍教程，[脚本](https://raw.githubusercontent.com/TNanko/Scripts/master/scripts/bilibili.py)，[使用教程](https://github.com/TNanko/Scripts/blob/master/docs/bilibili.md)
+* 企鹅读书，[脚本地址](https://raw.githubusercontent.com/TNanko/Scripts/master/scripts/qq_read.py)，[使用教程](https://github.com/TNanko/Scripts/blob/master/docs/qq_read.md)，[原作者js版](https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/qqreads.js)
+* `bilibili` 签到，[脚本地址](https://raw.githubusercontent.com/TNanko/Scripts/master/scripts/bilibili.py)，[使用教程](https://github.com/TNanko/Scripts/blob/master/docs/bilibili.md)
 
 ## 关于版本
+[更新日志](https://github.com/TNanko/Scripts/blob/master/docs/update.md)
 
 ### 配置文件的版本
 

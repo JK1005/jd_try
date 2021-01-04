@@ -11,12 +11,8 @@ import os
 cur_path = os.path.abspath(os.path.dirname(__file__))
 root_path = os.path.split(cur_path)[0]
 sys.path.append(root_path)
-import yaml
-import requests
 import logging
-import traceback
-from datetime import timedelta
-from setup import BASE_DIR, get_standard_time
+from setup import BASE_DIR
 
 def write_scripts_log(path, msg):
     """

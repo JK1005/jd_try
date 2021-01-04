@@ -573,7 +573,7 @@ def qq_read(qq_read_config, account):
     # 开宝箱领金币
     daily_tasks = get_daily_tasks(headers=headers)
     if daily_tasks['treasureBox']['doneFlag'] == 1 and daily_tasks['treasureBox']['timeInterval'] <= 60000:
-        content += f"\n【等待宝箱冷却完成】 {daily_tasks['treasureBox']['timeInterval'] / 1000} 秒后冷却完成，开启金币宝箱"
+        content += f"\n【宝箱冷却】 {daily_tasks['treasureBox']['timeInterval'] / 1000} 秒后冷却完成，开启金币宝箱"
         time.sleep(daily_tasks['treasureBox']['timeInterval'] / 1000 + 0.1)
     # 感觉下面两行可有可无
     daily_tasks = get_daily_tasks(headers=headers)
@@ -583,11 +583,11 @@ def qq_read(qq_read_config, account):
             content += f"\n【开启第{treasure_box_reward['count']}个宝箱】获得{treasure_box_reward['amount']}金币"
 
     # 宝箱金币奖励翻倍
-    # daily_tasks = get_daily_tasks(headers=headers)
-    # if daily_tasks and daily_tasks['treasureBox']['timeInterval'] - 600000 <= 60000:
-    #     content += f"\n【等待翻倍金币宝箱冷却完成】 {daily_tasks['treasureBox']['timeInterval'] / 1000} 秒后冷却完成，开启翻倍金币宝箱"
-    #     time.sleep((daily_tasks['treasureBox']['timeInterval'] - 600000) / 1000 + 0.1)
-    time.sleep(15)
+    daily_tasks = get_daily_tasks(headers=headers)
+    if daily_tasks and daily_tasks['treasureBox']['timeInterval'] - 600000 <= 60000:
+        content += f"\n【翻倍宝箱冷却】 {daily_tasks['treasureBox']['timeInterval'] / 1000} 秒后冷却完成，开启翻倍金币宝箱"
+        time.sleep((daily_tasks['treasureBox']['timeInterval'] - 600000) / 1000 + 0.1)
+    # time.sleep(15)
     daily_tasks = get_daily_tasks(headers=headers)
     if daily_tasks['treasureBox']['videoDoneFlag'] == 0:
         treasure_box_ads_reward = watch_treasure_box_ads(headers=headers)

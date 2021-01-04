@@ -1,3 +1,6 @@
+## 紧急通知
+由于本人版本退回操作，现在更新脚本需要保存配置文件，然后删掉 `Scripts` 文件夹**重新克隆本仓库**，仅此次更新会这样（2021/1/5）
+
 ## 描述
 
 一个使用 `Python` 语言写的薅羊毛脚本仓库，支持 `github action` 和 `linux/windows virtual private server`。 

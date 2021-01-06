@@ -45,5 +45,5 @@ if __name__ == '__main__':
     '''
     print(leam)
     print('【开始安装 TNanko Scripts ...】')
-    # setup_crontab()
+    setup_crontab()
     print('【安装成功！】')

@@ -1,9 +1,8 @@
-## 紧急通知
-由于本人版本退回操作，下次更新脚本可能会遇到一个错误 `unable to auto-detect email address` [解决方法](https://blog.csdn.net/liufangbaishi2014/article/details/50037507)或者保存配置文件，然后删掉 `Scripts` 文件夹**重新克隆本仓库**，仅此次更新会这样（2021/1/5）
+# Leam
 
 ## 描述
 
-一个使用 `Python` 语言写的薅羊毛脚本仓库，支持 `github action` 和 `linux/windows virtual private server`。 
+一个使用 `Python` 语言写的脚本仓库，支持 `github action` 和 `linux/windows virtual private server`。 
 
 ## 部署方式
 
@@ -23,12 +22,12 @@
     ```
 * 下载代码
     ```
-    git clone https://github.com/TNanko/Scripts.git
+    git clone https://github.com/TNanko/leam.git
     ```
 * 部署脚本
     ```yaml
     # 进入脚本目录
-    cd Scripts
+    cd leam
     
     # 安装脚本需要的包
     pip3 install -r requirements.txt
@@ -56,7 +55,7 @@
 
     ```shell
     cd /appdata/tnanko
-    wget --no-check-certificate https://raw.githubusercontent.com/TNanko/Scripts/master/config/config.yml.example -O config.yml
+    wget --no-check-certificate https://raw.githubusercontent.com/TNanko/leam/master/config/config.yml.example -O config.yml
     ```
 
 2. 修改刚刚下载好的`config.yml`，如何修改请见 [教程](docs/qq_read.md)，写完配置文件后在[在线检验yaml语法](https://www.toolfk.com/tool-format-yaml)检验一下 `yaml` 语法是否规范，当然你可以百度 `Google` 其他的在线检验网站。
@@ -82,11 +81,12 @@
 打开推送方式：将 `config.yml` 里面 `notify` 选项中，参数 `enable` 设置为 `true`
 
 ## 支持的脚本任务
-* 企鹅读书，[脚本地址](https://raw.githubusercontent.com/TNanko/Scripts/master/scripts/qq_read.py)，[使用教程](https://github.com/TNanko/Scripts/blob/master/docs/qq_read.md)，[原作者js版](https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/qqreads.js)
-* `bilibili` 签到，[脚本地址](https://raw.githubusercontent.com/TNanko/Scripts/master/scripts/bilibili.py)，[使用教程](https://github.com/TNanko/Scripts/blob/master/docs/bilibili.md)
+* 企鹅读书，[脚本地址](https://raw.githubusercontent.com/TNanko/leam/master/scripts/qq_read.py)，[使用教程](https://github.com/TNanko/leam/blob/master/docs/qq_read.md)，**原作者github@ziye12已删库**，薅羊毛也要适度
+* `bilibili` 签到，[脚本地址](https://raw.githubusercontent.com/TNanko/leam/master/scripts/bilibili.py)，[使用教程](https://github.com/TNanko/leam/blob/master/docs/bilibili.md)
+* 吾爱破解签到
 
 ## 关于版本
-[更新日志](https://github.com/TNanko/Scripts/blob/master/docs/update.md)
+[更新日志](https://github.com/TNanko/leam/blob/master/docs/update.md)
 版本检测原则
 * 放在前面说：**高版本的脚本不兼容低版本的配置文件**，更新脚本前务必看一下配置文件对应的**子版本号**是否发生改变，如果变动则必须更新配置文件，否则程序会报错（**当前版本的配置文件对应当前版本的脚本最佳**）；
 * 提醒使用者更新脚本。一般情况下，最新版本的脚本会在原有的基础上增加新功能和修复 `bug` ；

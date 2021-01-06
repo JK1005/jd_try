@@ -59,7 +59,7 @@ notify:
 # 脚本配置信息
 jobs:
   qq_read:
-    # 使用前请阅读 https://github.com/TNanko/Scripts/blob/master/docs/qq_read.md
+    # 使用前请阅读 https://github.com/TNanko/Scripts/blob/leam/docs/qq_read.md
     enable: false # true 启用脚本； false 不启用脚本（默认不启用脚本）
     version: v1.3.5
     skip_check_script_version: false # 默认不跳过版本检测

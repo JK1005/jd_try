@@ -99,12 +99,10 @@ def bilibili():
                 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.4 Safari/605.1.15'
             }
             utc_datetime, beijing_datetime = get_standard_time()
-            symbol = '=' * 16
-            print(
-                f'\n{symbol}【bilibili】{utc_datetime.strftime("%Y-%m-%d %H:%M:%S")}/{beijing_datetime.strftime("%Y-%m-%d %H:%M:%S")} {symbol}\n')
-
             start_time = time.time()
+
             title = f'☆【bilibili】{beijing_datetime.strftime("%Y-%m-%d %H:%M:%S")} ☆'
+            account_title = f"\n{'=' * 16}【bilibili】{utc_datetime.strftime('%Y-%m-%d %H:%M:%S')}/{beijing_datetime.strftime('%Y-%m-%d %H:%M:%S')} {'=' * 16}\n{title}"
             content = ''
             sign_result = sign(headers=headers)
             if sign_result:
@@ -125,16 +123,13 @@ def bilibili():
                     beijing_datetime.strftime("%Y-%m-%d %H:%M:%S")
                     log_path = folder_path + '/%s.log' % beijing_datetime.strftime('%Y-%m-%d')
                     # 写入日志
-                    log.write_scripts_log(path=log_path, msg='%s\n\n%s' % (title, content))
+                    log.write_scripts_log(path=log_path, msg='%s\n\n%s' % (account_title, content))
                     # 删除过期日志
                     log.delete_scripts_log(path=folder_path, valid_period=log_parameters['valid_period'])
                 except:
-                    print('写入日志失败！')
-                    print(title)
-                    print(content)
+                    print('写入日志失败！%s\n%s' % (account_title, content))
             else:
-                print(title)
-                print(content)
+                print(account_title + content)
 
             if bilibili_config['notify']:
                 # 消息推送方式

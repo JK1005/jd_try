@@ -589,11 +589,11 @@ def qq_read(qq_read_config, account):
             content += f"\n【翻倍宝箱冷却】翻倍金币宝箱 {(daily_tasks['treasureBox']['timeInterval'] - 600000) / 1000} 秒后冷却完成"
             time.sleep((daily_tasks['treasureBox']['timeInterval'] - 600000) / 1000 + 0.1)
             # time.sleep(15)
-            daily_tasks = get_daily_tasks(headers=headers)
-            if daily_tasks['treasureBox']['videoDoneFlag'] == 0:
-                treasure_box_ads_reward = watch_treasure_box_ads(headers=headers)
-                if treasure_box_ads_reward:
-                    content += f"\n【翻倍金币宝箱】获得{treasure_box_ads_reward['amount']}金币"
+        daily_tasks = get_daily_tasks(headers=headers)
+        if daily_tasks['treasureBox']['videoDoneFlag'] == 0:
+            treasure_box_ads_reward = watch_treasure_box_ads(headers=headers)
+            if treasure_box_ads_reward:
+                content += f"\n【翻倍金币宝箱】获得{treasure_box_ads_reward['amount']}金币"
 
         # 读书刷时长
         if max_read_time > today_read_time["todayReadSeconds"] // 60:
@@ -730,17 +730,23 @@ def main():
         try:
             # 获取config.yml账号信息
             accounts = qq_read_config['parameters']['ACCOUNTS']
+            process_delay = qq_read_config['process_delay']
+            process_pool_num = qq_read_config['process_pool_num']
             pool_num = lambda x: len(accounts) if len(accounts) > x else x
-            process_pool = Pool(pool_num(20))
-            print('开始执行任务...')
+            if process_pool_num <= 0:
+                process_pool_num = 10
+            process_pool = Pool(pool_num(process_pool_num))
+            print(f'开始执行任务...\n进程池大小：{process_pool_num}\t每次投入任务后延迟：{process_delay}秒')
             task_start_time = time.time()
             for account in accounts:
                 process_pool.apply_async(qq_read, args=(qq_read_config, account))
+                time.sleep(process_delay)
             process_pool.close()
             process_pool.join()
             print(f'🕛执行 {len(accounts)} 个QQ号完成！总耗时：%.2f秒\n如果帮助到您可以点下🌟STAR鼓励我一下，谢谢~' % (time.time() - task_start_time))
         except:
-            print('程序报错！请带上你的错误日志去 https://github.com/TNanko/Scripts/issues 反馈问题！')
+            print(traceback.format_exc())
+            print('程序报错！请带上你的错误日志去 https://github.com/TNanko/leam/issues 反馈问题！')
     else:
         print('未执行该任务，如需执行请在配置文件的对应的任务中，将参数enable设置为true\n')
 

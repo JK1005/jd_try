@@ -31,7 +31,7 @@ def write_scripts_log(path, msg):
 
         # 设置输出日志格式
         formatter = logging.Formatter(
-            fmt='%(asctime)s %(name)s %(levelname)s\n%(message)s',
+            fmt='%(asctime)s %(name)s %(levelname)s %(message)s\n\n',
             datefmt='%Y-%m-%d  %H:%M:%S %a'
         )
 

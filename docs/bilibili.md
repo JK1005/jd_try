@@ -45,7 +45,7 @@ notify:
 # 脚本配置信息
 jobs:
   bilibili:
-    # 使用前请阅读 https://raw.githubusercontent.com/TNanko/Scripts/master/scripts/bilibil.py 前12行使用说明
+    # 使用前请阅读 https://raw.githubusercontent.com/TNanko/leam/master/scripts/bilibil.py 前12行使用说明
     enable: false # true 启用脚本； false 不启用脚本（默认不启用脚本）
     version: v1.0.5
     skip_check_script_version: false # 默认不跳过版本检测

@@ -44,8 +44,8 @@ jobs:
               python3 wait24.py 0.1 0.1 29
       - name: '运行'
         run: |
-          node 蓝币换奖-1000京豆.js
-          node 蓝币换奖-20京豆.js 
+          node 蓝币换1000京豆.js
+          node 蓝币换20京豆.js 
          
           
         env:

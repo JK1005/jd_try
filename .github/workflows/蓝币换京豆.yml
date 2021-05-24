@@ -45,6 +45,7 @@ jobs:
       - name: '运行'
         run: |
           node 蓝币换奖-1000京豆.js
+          node 蓝币换奖-20京豆.js 
          
           
         env:

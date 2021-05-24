@@ -40,7 +40,7 @@ jobs:
       - name: '宠汪汪换20豆'
         run: |
               python3 wait24.py 0.1 0.1 29
-      - name: '运行'
+      - name: '运行 宠汪汪换20豆'
         run: |
           node 宠旺旺换京豆.js
          

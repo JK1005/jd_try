@@ -6,7 +6,7 @@ name: 京东试用(先取关)
 on:
   workflow_dispatch:
   schedule:
-    - cron: '45 15 * * *'
+    - cron: '45 12 * * *'
   watch:
         types: started
   repository_dispatch:
@@ -17,14 +17,29 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js 10.x
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-          node-version: 10.x
+          node-version: ${{ matrix.node-version }}
+      - name: Cache node_modules
+        uses: actions/cache@v2 # 使用 GitHub 官方的缓存 Action。
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }} # 使用 package-lock.json 的 Hash 作为缓存的 key。也可以使用 package.json 代替
       - name: npm install
         run: |
           npm install
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - name: '京东试用(先取关)'
+        run: |
+              python3 wait24.py 0.1 0.1 29
       - name: '运行 【京东试用(先取关)】'
         run: |
       

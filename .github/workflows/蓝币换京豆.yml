@@ -6,7 +6,7 @@ name: 蓝币换京豆
 on:
   workflow_dispatch:
   schedule:
-    - cron: '15 12,13,14,15,16 * * *'
+    - cron: '15 13,14,15 * * *'
   watch:
     types: started
   repository_dispatch:

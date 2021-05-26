@@ -6,7 +6,7 @@ name: 宠汪汪换20豆
 on:
   workflow_dispatch:
   schedule:
-    - cron: '15 5,13,21 * * *'
+    - cron: '15 5,21 * * *'
   watch:
     types: started
   repository_dispatch:
@@ -42,7 +42,7 @@ jobs:
               python3 wait24.py 0.1 0.1 29
       - name: '运行 宠汪汪换20豆'
         run: |
-          node 宠旺旺换京豆.js
+          node 宠旺旺换20京豆.js
          
           
         env:
